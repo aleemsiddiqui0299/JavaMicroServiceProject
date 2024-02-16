@@ -1,9 +1,7 @@
 package com.example;
 
-/**
- * Hello world!
- *
- */
+import vertex.Vertex;
+
 public class App 
 {
     public static void main( String[] args )
