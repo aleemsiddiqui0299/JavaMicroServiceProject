@@ -23,7 +23,7 @@ public class RouterVerticle extends AbstractVerticle {
     private Router createRouter(){
         Router router = Router.router(vertx);
 
-        router.route("/api/").handler(new RedirectAuthHandler() {
+        router.route("/api/listServices").handler(new RedirectAuthHandler() {
             @Override
             public void handle(RoutingContext routingContext) {
                 System.out.println("Incoming request handler called");
