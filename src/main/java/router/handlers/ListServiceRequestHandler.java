@@ -23,7 +23,7 @@ public class ListServiceRequestHandler extends BaseHandler{
         }
         JsonObject jsonObject = new JsonObject()
                 .put("time",System.currentTimeMillis())
-                .put("services",new JsonArray());
+                .put("services",new JsonArray(arr));
 
         routingContext.response()
                 .putHeader("Content-Type","application/json")
