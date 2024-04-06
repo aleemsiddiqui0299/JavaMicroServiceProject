@@ -27,7 +27,7 @@ public class RouterVerticle extends AbstractVerticle {
     private Router createRouter(){
         Router router = Router.router(vertx);
 
-        router.route("/aoi/listServices").handler(new ListServiceRequestHandler());
+        router.route("/api/listServices").handler(new ListServiceRequestHandler());
 //        router.route("/api/listServices").handler(new RedirectAuthHandler() {
 //            @Override
 //            public void handle(RoutingContext routingContext) {
