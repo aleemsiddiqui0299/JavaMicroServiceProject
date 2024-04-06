@@ -4,8 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.handler.RedirectAuthHandler;
+import router.handlers.ListServiceRequestHandler;
 
 public class RouterVerticle extends AbstractVerticle {
     @Override
@@ -16,19 +15,25 @@ public class RouterVerticle extends AbstractVerticle {
                 startPromise.fail(asyncResult.cause().getMessage());
             }
             else{
+                System.out.println("Http server async response success");
                 startPromise.complete();
             }
-        });
+        }).onFailure(
+                failure ->{
+                    System.out.println("Failed to start HTTP server on port 8080... "+failure);
+                }
+        );
     }
     private Router createRouter(){
         Router router = Router.router(vertx);
 
-        router.route("/api/listServices").handler(new RedirectAuthHandler() {
-            @Override
-            public void handle(RoutingContext routingContext) {
-                System.out.println("Incoming request handler called");
-            }
-        });
+        router.route("/aoi/listServices").handler(new ListServiceRequestHandler());
+//        router.route("/api/listServices").handler(new RedirectAuthHandler() {
+//            @Override
+//            public void handle(RoutingContext routingContext) {
+//                System.out.println("Incoming request handler called");
+//            }
+//        });
         return router;
     }
 
