@@ -4,6 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
+import router.handlers.DataRequestHandler;
 import router.handlers.ListServiceRequestHandler;
 
 public class RouterVerticle extends AbstractVerticle {

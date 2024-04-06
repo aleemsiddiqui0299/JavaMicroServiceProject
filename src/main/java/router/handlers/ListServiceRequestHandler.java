@@ -14,19 +14,25 @@ public class ListServiceRequestHandler extends BaseHandler{
         System.out.println("List Service api hit");
         System.out.println("Routing Context : "+routingContext);
 
-        ArrayList<String> arr = new ArrayList<>();
+        try{
+            ArrayList<String> arr = new ArrayList<>();
 
-        //can fetch from db here
-        String[] services = new String[]{"peek", "update", "remove"};
-        for(String service: services){
-            arr.add(service);
+            //can fetch from db here
+            String[] services = new String[]{"peek", "update", "remove"};
+            for(String service: services){
+                arr.add(service);
+            }
+            JsonObject jsonObject = new JsonObject()
+                    .put("time",System.currentTimeMillis())
+                    .put("services",new JsonArray(arr));
+
+            routingContext.response()
+                    .putHeader("Content-Type","application/json")
+                    .end(jsonObject.encode());
+        } catch (Exception e) {
+            System.out.println("Exception in list services handler: " + e.getMessage());
+            routingContext.response().setStatusCode(500).end("Internal Server Error");
         }
-        JsonObject jsonObject = new JsonObject()
-                .put("time",System.currentTimeMillis())
-                .put("services",new JsonArray(arr));
 
-        routingContext.response()
-                .putHeader("Content-Type","application/json")
-                .end(jsonObject.encode());
     }
 }
