@@ -27,7 +27,18 @@ public class RouterVerticle extends AbstractVerticle {
     private Router createRouter(){
         Router router = Router.router(vertx);
 
-        router.route("/api/listServices").handler(new ListServiceRequestHandler());
+        //enabling cors from server side
+        router.route().handler(routingContext ->{
+            routingContext.response()
+                    .putHeader("Access-Control-Allow-Origin","*")
+                    .putHeader("Access-Control-Allow-Methods","GET,POST,PUT,DELETE")
+                    .putHeader("Access-Control-Allow-Headers","content-type");
+            routingContext.next();
+        });
+        router.get("/").handler(routingContext -> {
+            routingContext.response().end("Hello User");
+        });
+        router.get("/api/listServices").handler(new ListServiceRequestHandler());
 //        router.route("/api/listServices").handler(new RedirectAuthHandler() {
 //            @Override
 //            public void handle(RoutingContext routingContext) {

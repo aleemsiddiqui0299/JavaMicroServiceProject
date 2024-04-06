@@ -1,3 +1,4 @@
+console.log("fetching services");
 fetch('http://localhost:8080/api/listServices').then(response=>response.json())
                                                .then(data => {
                                                const stringList = data.services;
