@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MoviCollectionWithCache {
+
     private static final String connectionString="mongodb+srv://<username>:<password>@<deployment-name>.mongodb.net/";
     private static final ServerApi serverApi = ServerApi.builder()
             .version(ServerApiVersion.V1)
@@ -29,7 +30,7 @@ public class MoviCollectionWithCache {
     private static final MongoClient mongoClient = MongoClients.create(settings);
     private static final LoadingCache<String , Document> cache = CacheBuilder.newBuilder()
             .maximumSize(100)
-            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .expireAfterWrite(20, TimeUnit.SECONDS)
             .build(new CacheLoader<String, Document>() {
                 @Override
                 public Document load(String key) throws Exception {
@@ -64,7 +65,7 @@ public class MoviCollectionWithCache {
         System.out.println("Data fetched from cache: " + data);
 
         try {
-            Thread.sleep(600000); // Sleep for 10 minutes
+            Thread.sleep(20000); // Sleep for 10 minutes
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
