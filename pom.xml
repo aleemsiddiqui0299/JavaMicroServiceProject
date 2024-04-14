@@ -23,6 +23,11 @@
   <name>vertx-microservices-demo</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+      <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>5.0.1</version>
+      </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

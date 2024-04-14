@@ -11,6 +11,8 @@ public class DataRequestHandler extends BaseHandler{
         System.out.println("GET DATA CALL");
         try {
             Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:testdb","SA","");
+//            String jdbcUrl = "jdbc:hsqldb:hsql://localhost:" + 9001 + "/testdb";
+//            Connection conn = DriverManager.getConnection(jdbcUrl, "SA", "");
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM table_name");
             ResultSet rs = stmt.executeQuery();
             StringBuilder responseData = new StringBuilder();
