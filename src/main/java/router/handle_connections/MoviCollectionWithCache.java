@@ -63,6 +63,16 @@ public class MoviCollectionWithCache {
         data = getData("example_key");
         System.out.println("Data fetched from cache: " + data);
 
+        try {
+            Thread.sleep(600000); // Sleep for 10 minutes
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Fetch data again after cache expiration, it should be fetched from MongoDB again
+        data = getData("example_key");
+        System.out.println("Data fetched after cache expiration: " + data);
+
 
     }
 }
