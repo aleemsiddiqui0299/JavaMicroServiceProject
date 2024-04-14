@@ -37,6 +37,7 @@ public class MoviCollectionWithCache {
                 }
             });
     public static Document getData(String key) throws ExecutionException {
+        System.out.println("FETCHING FROM CACHE");
         return cache.get(key);
     }
 
@@ -48,13 +49,20 @@ public class MoviCollectionWithCache {
         Document document = collection.find().first();
         if(document != null) {
             System.out.println("Document receieved : " + document.toJson());
+            return document;
         } else {
             System.out.println("No matching document found");
+            return new Document();
         }
-        database.runCommand(new org.bson.Document("ping", 1));
-        System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
-        return document;
     }
 
+    public static void main(String[] args) throws ExecutionException {
+        Document data = getData("example_key");
+        System.out.println("Data fetched: " + data);
 
+        data = getData("example_key");
+        System.out.println("Data fetched from cache: " + data);
+
+
+    }
 }
