@@ -62,7 +62,18 @@ public class DataRequestHandler extends BaseHandler{
     protected void doHandle(RoutingContext routingContext)  {
         System.out.println("GET DATA CALL");
         try{
-            Document data = getData("example_key");
+            Document data = getData("demo_key");
+            System.out.println("Data fetched from cache: " + data);
+
+            try {
+                Thread.sleep(20000); // Sleep for 10 minutes
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            // Fetch data again after cache expiration, it should be fetched from MongoDB again
+            data = getData("example_key");
+            System.out.println("Data fetched after cache expiration: " + data);
         }
         catch(ExecutionException e){
             System.out.println("EXCEPTION IN MONGODB DATA CALL "+e.getMessage());
