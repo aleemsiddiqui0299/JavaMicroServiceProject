@@ -11,6 +11,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import org.bson.Document;
 
@@ -60,13 +61,18 @@ public class DataRequestHandler extends BaseHandler{
     }
     @Override
     protected void doHandle(RoutingContext routingContext)  {
+        HttpServerResponse response = routingContext.response();
+        response.putHeader("content-type","application/json");
         System.out.println("GET DATA CALL");
         try{
             Document data = getData("demo_key");
-            System.out.println("Data fetched from cache: " + data);
+            System.out.println("Data fetched from mongo client: " + data);
+            String jsonData = data.toJson();
+            response.end(jsonData);
         }
         catch(ExecutionException e){
             System.out.println("EXCEPTION IN MONGODB DATA CALL "+e.getMessage());
+            response.setStatusCode(404).send("{}");
         }
     }
 }
