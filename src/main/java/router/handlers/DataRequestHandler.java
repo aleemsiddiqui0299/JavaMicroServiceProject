@@ -47,15 +47,15 @@ public class DataRequestHandler extends BaseHandler{
 
     private static Document getDataFromDatabase(String key){
         MongoDatabase database = mongoClient.getDatabase("sample_mflix");
-        System.out.println("Getting collection");
+        System.out.println("Getting collection from mongodb");
         MongoCollection<org.bson.Document> collection = database.getCollection("movies");
-        System.out.println("getting document");
+        System.out.println("getting movies document");
         Document document = collection.find().first();
         if(document != null) {
-            System.out.println("Document receieved : " + document.toJson());
+            System.out.println("Movie Document receieved : " + document.toJson());
             return document;
         } else {
-            System.out.println("No matching document found");
+            System.out.println("No matching movie document found");
             return new Document();
         }
     }
