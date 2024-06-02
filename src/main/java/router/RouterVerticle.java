@@ -1,13 +1,22 @@
 package router;
 
+import com.google.inject.Inject;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
+import router.handlers.DataHandler;
 import router.handlers.DataRequestHandler;
 import router.handlers.ListServiceRequestHandler;
 
 public class RouterVerticle extends AbstractVerticle {
+
+    private final DataHandler dataHandler;
+
+    @Inject
+    public RouterVerticle(DataHandler dataHandler) {
+        this.dataHandler=dataHandler;
+    }
     @Override
     public void start(Promise<Void> startPromise){
         Future<Void> future = init();
