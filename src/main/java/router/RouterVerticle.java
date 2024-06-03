@@ -48,6 +48,7 @@ public class RouterVerticle extends AbstractVerticle {
         router.get("/").handler(routingContext -> {
             routingContext.response().end("Hello User");
         });
+        router.get("/api/di").handler(dataHandler::handle);
         router.get("/api/listServices").handler(new ListServiceRequestHandler());
         router.get("/api/data").handler(new DataRequestHandler());
 //        router.route("/api/listServices").handler(new RedirectAuthHandler() {
