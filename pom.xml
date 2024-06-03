@@ -15,9 +15,9 @@
         <version>3.3.0</version>
         <configuration>
           <archive>
-            <maniest>
+            <manifest>
               <mainClass>MainApplication</mainClass>
-            </maniest>
+            </manifest>
           </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
