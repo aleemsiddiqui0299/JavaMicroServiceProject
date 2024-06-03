@@ -26,5 +26,8 @@ public class MainApplication extends Application<AppConfig> {
         //2. all handlers as singleton
         //3. security cases - sql injection, attacks secure, des
         //4. version cve
+        //5. healthcheck for dependencies
+        //6. modularity, use enums for apis
+        //7. openapi spec/swagger spec
     }
 }

@@ -49,8 +49,8 @@ public class RouterVerticle extends AbstractVerticle {
             routingContext.response().end("Hello User");
         });
         router.get("/api/di").handler(dataHandler::handle);
-        router.get("/api/listServices").handler(new ListServiceRequestHandler());
-        router.get("/api/data").handler(new DataRequestHandler());
+//        router.get("/api/listServices").handler(new ListServiceRequestHandler());
+//        router.get("/api/data").handler(new DataRequestHandler());
 //        router.route("/api/listServices").handler(new RedirectAuthHandler() {
 //            @Override
 //            public void handle(RoutingContext routingContext) {
@@ -65,7 +65,7 @@ public class RouterVerticle extends AbstractVerticle {
         Router router = createRouter();
         vertx.createHttpServer()
                 .requestHandler(router)
-                .listen(8080, result -> {
+                .listen(8082, result -> {
                     if (result.succeeded()) {
                         System.out.println("Server started on port 8080");
                         promise.complete();
